@@ -13,25 +13,50 @@
 </head>
 
 <body>
-  <h1>¡Bienvenido a Suma4!</h1>
-  <div class="row">
-    <div class="col-3">
-      Elemento 1
+  <div class="container">
+    <div class="text-center" id="titulo">
+      <h1>Bienvenido a Suma4</h1>
+      <p>Suma4 es un juego que consiste en <b>sumar 4 a cada número, sin llevadas. </b><br>
+        ¿Parece fácil? ¡Cada ronda se complica! <br>
+        ¿Te atreves?
+      </p>
+      <button type="button" class="btn btn-primary btn-lg btn-block mt-5 mb-5">¡Empezar!</button>
     </div>
-    <div class="col-3">
-      Elemento 2
+    <div class="row mb-5">
+      <div class="col-3" id="elem1_in">
+        Elemento 1
+      </div>
+      <div class="col-3" id="elem2_in">
+        Elemento 2
+      </div>
+      <div class="col-3" id="elem3_in">
+        Elemento 3
+      </div>
+      <div class="col-3" id="elem4_in">
+        Elemento 4
+      </div>
     </div>
-    <div class="col-3">
-      Elemento 3
-    </div>
-    <div class="col-3">
-      Elemento 4
+    <div class="row">
+      <div class="col-3" id="elem1_out">
+        Elemento 1
+      </div>
+      <div class="col-3" id="elem2_out">
+        Elemento 2
+      </div>
+      <div class="col-3" id="elem3_out">
+        Elemento 3
+      </div>
+      <div class="col-3" id="elem4_out">
+        Elemento 4
+      </div>
     </div>
   </div>
 
 
-
   <!-- Optional JavaScript -->
+  <script src="script/efectos.js" type="text/javascript"></script>
+  <script src="script/funcion.js" type="text/javascript"></script>
+
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
