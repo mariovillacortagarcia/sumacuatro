@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $(".masCuatro").hide();
 
-  $("button").click(function() {
+  $("#empezar").click(function() {
     $("#titulo").hide();
     $(".masCuatro").show();
     start();
