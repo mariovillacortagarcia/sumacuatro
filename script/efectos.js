@@ -137,10 +137,10 @@ function limpiaInput() {
 
 function reduceTiempoEsconder() {
   if (tiempoEsconder > 3000) {
-    tiempoEsconder -= 250;
+    tiempoEsconder -= 300;
   } else if (tiempoEsconder > 1500) {
-    tiempoEsconder -= 200;
+    tiempoEsconder -= 250;
   } else if (tiempoEsconder > 500) {
-    tiempoEsconder -= 100;
+    tiempoEsconder -= 150;
   }
 }
