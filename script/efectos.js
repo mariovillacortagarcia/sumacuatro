@@ -2,6 +2,8 @@ var ronda = 1;
 var puntuacion = 0;
 var tiempo = 30;
 var estado = [0, 0, 0, 0];
+var temporizador;
+
 $(document).ready(function() {
   $(".masCuatro").hide();
 
@@ -18,7 +20,7 @@ $(document).ready(function() {
 
 function start() {
   //Cabecera
-  var temporizador = setInterval(function() { //Temporizador
+  temporizador = setInterval(function() { //Temporizador
     if (tiempo < 0) { //Fin de la partida
       alert("Fin de la partida");
       clearInterval(temporizador);
@@ -54,7 +56,18 @@ function start() {
 
 }
 
-function check(){
-  
+function check() {
+  clearInterval(temporizador);
+  for (var i = 0; i < 4; i++) {
+    var elem = "#elem" + String(i + 1) + "_out";
+    if (parseInt($(elem).val()) === (estado[i] + 4)) {
+      $(elem).addClass("text-success");
+      puntuacion++;
+    } else {
+      $(elem).addClass("text-danger");
+    }
+  }
+
+
 
 }
