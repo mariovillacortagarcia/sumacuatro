@@ -26,16 +26,17 @@ function start() {
     if (tiempo < 0) { //Fin de la partida
       alert("Fin de la partida. Puntuación: " + puntuacion);
       clearInterval(temporizador);
+    } else {
+      var timing = new Date(0);
+      timing.setSeconds(tiempo);
+      timing = timing.toISOString().substr(14, 5)
+      $("#temporizador").empty();
+      if (tiempo <= 5) {
+        timing = "<a class='text-danger'>" + timing + "</a>";
+      }
+      $("#temporizador").append(timing);
+      tiempo--;
     }
-    var timing = new Date(0);
-    timing.setSeconds(tiempo);
-    timing = timing.toISOString().substr(14, 5)
-    $("#temporizador").empty();
-    if (tiempo <= 5) {
-      timing = "<a class='text-danger'>" + timing + "</a>";
-    }
-    $("#temporizador").append(timing);
-    tiempo--;
   }, 1000);
   actualizaRonda();
   actualizaPuntuacion();
@@ -107,12 +108,14 @@ function actualizaEntrada() {
   }
 
 }
+
 function actualizaSumas() {
   suma = Math.round(Math.random() * 4);
   $(".sumas").empty();
-  $(".sumas").append("+"+String(suma));
+  $(".sumas").append("+" + String(suma));
 
 }
+
 function actualizaPuntuacion() {
   $("#puntuacion").empty();
   $("#puntuacion").append("Puntuación: " + String(puntuacion));
@@ -137,7 +140,7 @@ function reduceTiempoEsconder() {
     tiempoEsconder -= 250;
   } else if (tiempoEsconder > 1500) {
     tiempoEsconder -= 200;
-  } else if (tiempoEsconder > 500){
+  } else if (tiempoEsconder > 500) {
     tiempoEsconder -= 100;
   }
 }
