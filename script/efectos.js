@@ -1,8 +1,9 @@
 var ronda = 1;
 var puntuacion = 0;
 var tiempo = 180;
-var tiempoEsconder = 6000;
+var tiempoEsconder = 8000;
 var estado = [0, 0, 0, 0];
+var suma = 4;
 var temporizador;
 
 $(document).ready(function() {
@@ -41,6 +42,7 @@ function start() {
 
   //Inicializacion de los numeros
   actualizaEntrada();
+  actualizaSumas();
   limpiaInput();
 
   //Esconde numeros
@@ -55,7 +57,7 @@ function check() {
   clearInterval(temporizador);
   for (var i = 0; i < 4; i++) {
     var elem = "#elem" + String(i + 1) + "_out";
-    if (parseInt($(elem).val()) === (estado[i] + 4)) {
+    if (parseInt($(elem).val()) === (estado[i] + suma)) {
       $(elem).addClass("text-success");
       puntuacion++;
     } else {
@@ -63,6 +65,7 @@ function check() {
     }
   }
   actualizaPuntuacion();
+  muestraEntrada();
   setTimeout(function() {
     ronda++;
     reduceTiempoEsconder();
@@ -104,7 +107,12 @@ function actualizaEntrada() {
   }
 
 }
+function actualizaSumas() {
+  suma = Math.round(Math.random() * 4);
+  $(".sumas").empty();
+  $(".sumas").append("+"+String(suma));
 
+}
 function actualizaPuntuacion() {
   $("#puntuacion").empty();
   $("#puntuacion").append("Puntuación: " + String(puntuacion));
