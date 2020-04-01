@@ -20,9 +20,10 @@ $(document).ready(function() {
 
 function start() {
   //Cabecera
+  console.log(tiempo);
   temporizador = setInterval(function() { //Temporizador
     if (tiempo < 0) { //Fin de la partida
-      alert("Fin de la partida");
+      alert("Fin de la partida. Puntuación: "+puntuacion);
       clearInterval(temporizador);
     }
     var timing = new Date(0);
@@ -30,30 +31,52 @@ function start() {
     timing = timing.toISOString().substr(14, 5)
     $("#temporizador").empty();
     if (tiempo <= 5) {
-      console.log("Hola");
       timing = "<a class='text-danger'>" + timing + "</a>";
     }
     $("#temporizador").append(timing);
     tiempo--;
   }, 1000);
-  $("#ronda").append("Ronda " + String(ronda));
-  $("#puntuacion").append("Puntuación: " + String(puntuacion));
-
+  actualizaRonda();
+  actualizaPuntuacion();
 
   //Inicializacion de los numeros
+  actualizaEntrada();
+  limpiaInput();
+
+}
+
+function actualizaEntrada() {
   for (var j = 0; j < 4; j++) {
-    estado[j] = Math.round(Math.random() * 9);
+    var elem = "#elem" + String(j + 1) + "_in";
+    estado[j] = Math.round(Math.random() * 10);
     for (var k = 0; k < j; k++) {
       while (estado[k] === estado[j]) { //Asegura numeros distintos
-        estado[j] = Math.round(Math.random() * 9);
+        estado[j] = Math.round(Math.random() * 10);
       }
     }
+    $(elem).empty();
+    $(elem).append("<h3> " + String(estado[j]) + "</h3>");
   }
-  $("#elem1_in").append("<h3> " + String(estado[0]) + "</h3>");
-  $("#elem2_in").append("<h3> " + String(estado[1]) + "</h3>");
-  $("#elem3_in").append("<h3> " + String(estado[2]) + "</h3>");
-  $("#elem4_in").append("<h3> " + String(estado[3]) + "</h3>");
 
+}
+
+function actualizaPuntuacion() {
+  $("#puntuacion").empty();
+  $("#puntuacion").append("Puntuación: " + String(puntuacion));
+}
+
+function actualizaRonda() {
+  $("#ronda").empty();
+  $("#ronda").append("Ronda " + String(ronda));
+}
+
+function limpiaInput(){
+  for (var i = 0; i < 4; i++) {
+    var elem = "#elem" + String(i + 1) + "_out";
+      $(elem).removeClass("text-success");
+      $(elem).removeClass("text-danger");
+      $(elem).val('');
+  }
 }
 
 function check() {
@@ -67,6 +90,12 @@ function check() {
       $(elem).addClass("text-danger");
     }
   }
+  actualizaPuntuacion();
+  setTimeout(function() {
+    ronda++;
+    start();
+
+  }, 1500);
 
 
 
