@@ -1,7 +1,7 @@
 var ronda = 1;
 var puntuacion = 0;
 var tiempo = 180;
-var tiempoEsconder = 6500;
+var tiempoEsconder = 7500;
 var estado = [0, 0, 0, 0];
 var suma = 4;
 var temporizador;
