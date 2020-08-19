@@ -6,30 +6,32 @@ var estado = [0, 0, 0, 0];
 var suma = 4;
 var temporizador;
 
-$(document).ready(function() {
+$(document).ready(function () {
   $(".masCuatro").hide();
 
-  $("#empezar").click(function() {
+  $("#empezar").click(function () {
     $("#titulo").hide();
     $(".masCuatro").show();
     start();
   });
 
-  $("#siguiente").click(function() {
+  $("#siguiente").click(function () {
     check();
   });
 });
 
 function start() {
   //Cabecera
-  temporizador = setInterval(function() { //Temporizador
-    if (tiempo < 0) { //Fin de la partida
+  temporizador = setInterval(function () {
+    //Temporizador
+    if (tiempo < 0) {
+      //Fin de la partida
       alert("Fin de la partida. Puntuación: " + puntuacion);
       clearInterval(temporizador);
     } else {
       var timing = new Date(0);
       timing.setSeconds(tiempo);
-      timing = timing.toISOString().substr(14, 5)
+      timing = timing.toISOString().substr(14, 5);
       $("#temporizador").empty();
       if (tiempo <= 5) {
         timing = "<a class='text-danger'>" + timing + "</a>";
@@ -47,18 +49,16 @@ function start() {
   limpiaInput();
 
   //Esconde numeros
-  setTimeout(function() {
+  setTimeout(function () {
     escondeEntrada();
   }, tiempoEsconder);
-
-
 }
 
 function check() {
   clearInterval(temporizador);
   for (var i = 0; i < 4; i++) {
     var elem = "#elem" + String(i + 1) + "_out";
-    if (parseInt($(elem).val()) === (estado[i] + suma)) {
+    if (parseInt($(elem).val()) === estado[i] + suma) {
       $(elem).addClass("text-success");
       puntuacion++;
     } else {
@@ -67,16 +67,12 @@ function check() {
   }
   actualizaPuntuacion();
   muestraEntrada();
-  setTimeout(function() {
+  setTimeout(function () {
     ronda++;
     reduceTiempoEsconder();
     console.log(tiempoEsconder);
     start();
-
   }, 1500);
-
-
-
 }
 
 function escondeEntrada() {
@@ -100,20 +96,19 @@ function actualizaEntrada() {
     var elem = "#elem" + String(j + 1) + "_in";
     estado[j] = Math.round(Math.random() * 10);
     for (var k = 0; k < j; k++) {
-      while (estado[k] === estado[j]) { //Asegura numeros distintos
+      while (estado[k] === estado[j]) {
+        //Asegura numeros distintos
         estado[j] = Math.round(Math.random() * 10);
       }
     }
     muestraEntrada();
   }
-
 }
 
 function actualizaSumas() {
   suma = Math.round(Math.random() * 4);
   $(".sumas").empty();
   $(".sumas").append("+" + String(suma));
-
 }
 
 function actualizaPuntuacion() {
@@ -131,16 +126,16 @@ function limpiaInput() {
     var elem = "#elem" + String(i + 1) + "_out";
     $(elem).removeClass("text-success");
     $(elem).removeClass("text-danger");
-    $(elem).val('');
+    $(elem).val("");
   }
 }
 
 function reduceTiempoEsconder() {
   if (tiempoEsconder > 3000) {
-    tiempoEsconder -= 300;
+    tiempoEsconder -= 200;
   } else if (tiempoEsconder > 1500) {
-    tiempoEsconder -= 250;
-  } else if (tiempoEsconder > 500) {
     tiempoEsconder -= 150;
+  } else if (tiempoEsconder > 500) {
+    tiempoEsconder -= 100;
   }
 }
